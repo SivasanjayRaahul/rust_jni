@@ -1,12 +1,9 @@
-use jni::JNIEnv;
 use jni::objects::JClass;
+use jni::JNIEnv;
 pub type Jint = u32;
 pub type JBool = bool;
 
-
-fn is_prime<'a>(
-    number :Jint
-) -> JBool {
+fn is_prime<'a>(number: Jint) -> JBool {
     if number < 2 {
         return false;
     }
@@ -19,10 +16,11 @@ fn is_prime<'a>(
 }
 
 #[no_mangle]
-pub extern "system" fn Java_prime_1number_PrimeNumber_getCount<'local>(mut env: JNIEnv<'local>,
-                                                     class: JClass<'local>,
-                                                     range: Jint)
-                                                    -> Jint {
+pub extern "system" fn Java_prime_1number_PrimeNumber_getCount<'local>(
+    mut env: JNIEnv<'local>,
+    class: JClass<'local>,
+    range: Jint,
+) -> Jint {
     let mut prime_number_count: Jint = 0;
     for number in 1..=range {
         if is_prime(number) {
