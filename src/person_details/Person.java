@@ -13,11 +13,12 @@ public class Person {
         System.loadLibrary("rust_jni");
     }
 
-    private static native String getName(Person person);
+    public static native String getName();
 
     public static void main(String[] args) {
         Person person = new Person(1, "SSR");
-        Person.getName(person);
+        String name = person.getName();
+        System.out.println("Name : " + name);
     }
 
 }
