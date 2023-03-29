@@ -1,5 +1,7 @@
 use jni::objects::JClass;
 use jni::JNIEnv;
+use jni::sys::jint;
+
 pub type Jint = u32;
 pub type JBool = bool;
 
@@ -28,4 +30,14 @@ pub extern "system" fn Java_prime_1number_PrimeNumber_getCount<'local>(
         }
     }
     return prime_number_count;
+}
+
+#[no_mangle]
+pub extern "system" fn Java_multiply_Main_timesRust<'local>(
+    mut env: JNIEnv<'local>,
+    obj: JClass<'local>,
+    multiplier: jint,
+) -> jint {
+    let state = env.get_field(obj, "state", "I");
+    state.unwrap().i().unwrap() * multiplier
 }
